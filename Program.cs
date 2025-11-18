@@ -81,26 +81,6 @@ public class Program
                     Console.WriteLine("-----------");
                     nameWizard = nameWizard.Substring(0, 1).ToUpper() + nameWizard.Substring(1).ToLower();
 
-                    bool validador = false;
-
-                    foreach (char i in nameWizard)
-                    {
-                        if (char.IsDigit(i))
-                        {
-                            validador = true;
-                        }
-                        else
-                        {
-                            continue;
-                        }
-                    }
-
-                    if (validador)
-                    {
-                        Console.WriteLine(InputErrorMessageName);
-                        break;
-                    }
-                    
                     for (int day = 1; day <= 5; day++)
                     {
                         hours = random.Next(1, 25);
