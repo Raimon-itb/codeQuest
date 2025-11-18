@@ -17,7 +17,6 @@ public class Program
         const string MenuOptionExit = "8. Exit game";
         const string MenuPrompt = "Choose an option (1-7) - (0) to exit: ";
         const string InputErrorMessage = "Invalid input. Please enter a number between 0 and 7.";
-        const string InputErrorMessageName = "Invalid name, you cant use numbers.";
         const string uslessLevel = "Reapeat again in the second try.";
         const string LowLevel = "Still confusing a wand with a spoon.";
         const string midLevel = "You are an evoker of magic winds.";
@@ -29,13 +28,76 @@ public class Program
         const string rankA = "Elarion of the Embers";
         const string rankS = "ITB-Wizard the Grey";
         const string RankMessage = "You are rank {0}";
+        const string MonsterMessage = "{0} has apeard!!!";
+        const string MonsterDeathMessage = "{0} has died!!!";
+        const string CurrentLevelMessage = "Youre current level is {0}.";
+        const string DiceSideOne = """ 
+           ________
+          /       /|   
+         /_______/ |
+         |       | |
+         |   o   | /
+         |       |/ 
+         '-------'
+         """;
+        const string DiceSideTwo = """ 
+           ________
+          /       /|   
+         /_______/ |
+         |     o | |
+         |       | /
+         | o     |/ 
+         '-------'
+         """;
+        const string DiceSideThree = """ 
+           ________
+          /       /|   
+         /_______/ |
+         |     o | |
+         |   o   | /
+         | o     |/ 
+         '-------'
+         """;
+        const string DiceSideFour = """ 
+           ________
+          /       /|   
+         /_______/ |
+         | o   o | |
+         |       | /
+         | o   o |/ 
+         '-------'
+         """;
+        const string DiceSideFive = """ 
+           ________
+          /       /|   
+         /_______/ |
+         | o   o | |
+         |   o   | /
+         | o   o |/ 
+         '-------'
+         """;
+        const string DiceSideSix = """ 
+           ________
+          /       /|   
+         /_______/ |
+         | o   o | |
+         | o   o | /
+         | o   o |/ 
+         '-------'
+         """;
+        const int maximMonters = 5;
 
         int op = 0;
         int level = 1;
         int hours = 0;
+        int hp = 0;
+        int[] dicesValor = { 1, 2, 3, 4, 5, 6 };
+        int[] monsterRosterHp = { 3, 5, 10, 11, 18, 15, 20, 50 };
         bool validInput;
         string rankWizard = "Unknown";
         string nameWizard = "Unknown";
+        string[] dices = { DiceSideOne, DiceSideTwo, DiceSideThree, DiceSideFour, DiceSideFive, DiceSideSix};
+        string[] monsterRoster = { "Wandering Skeleton 💀", "Forest Goblin 👹", "Green Slime 🤢", "Ember Wolf 🐺", "Giant Spider 🕷️", "Iron Golem 🤖", "Lost Necromancer 🧝‍", "Ancient Dragon 🐉" };
 
         Random random = new Random();
 
@@ -124,7 +186,34 @@ public class Program
                     break;
 
                 case 2:
-                    Console.WriteLine("You venture into the dungeon...");
+                    int randomMonster = random.Next(0, 8);
+
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Console.WriteLine("");
+                        Console.WriteLine(MonsterMessage, monsterRoster[randomMonster]);
+                        hp = monsterRosterHp[randomMonster];
+                        Console.WriteLine("------------------------");
+                        Console.WriteLine("");
+                        Console.WriteLine("Dice is rolling...");
+
+                        while (hp > 0)
+                        {
+                            int valorDice = random.Next(0, 6);
+
+                            Console.WriteLine(dices[valorDice]);
+                            hp = hp - dicesValor[valorDice];
+
+                        }
+
+                        Console.WriteLine(MonsterDeathMessage, monsterRoster[randomMonster]);
+                        Console.WriteLine("");
+                        Console.WriteLine("");
+                        level++;
+                    }
+
+                    Console.WriteLine(CurrentLevelMessage, level);
+
                     break;
 
                 case 3:
