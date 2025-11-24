@@ -337,7 +337,19 @@ public class Program
                     break;
 
                 case 4:
-                    Console.WriteLine("You loot the mine and find some gold!");
+                    if (inventory.Length == 0)
+                    {
+                        Console.WriteLine("Your inventory is empty.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("=== INVENTORY ===");
+                        for (int i = 0; i < inventory.Length; i++)
+                        {
+                            Console.WriteLine($"Slot {i + 1}: {inventory[i]}");
+                        }
+                    }
+
                     break;
                 case 5:
                     Console.WriteLine("You loot the mine and find some gold!");
