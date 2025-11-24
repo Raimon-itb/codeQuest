@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Reflection.Emit;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 public class Program
 {
     static void Main()
     {
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
+
         const string MenuTitle = "===== MAIN MENU - CODEQUEST =====";
         const string MenuSubTitle = "===== Welcome, {0} the {1} with level {2} =====";
         const string MenuOption1 = "1. Train your wizard";
@@ -17,16 +20,16 @@ public class Program
         const string MenuOptionExit = "8. Exit game";
         const string MenuPrompt = "Choose an option (1-7) - (0) to exit: ";
         const string InputErrorMessage = "Invalid input. Please enter a number between 0 and 7.";
-        const string uslessLevel = "Reapeat again in the second try.";
+        const string UslessLevel = "Reapeat again in the second try.";
         const string LowLevel = "Still confusing a wand with a spoon.";
-        const string midLevel = "You are an evoker of magic winds.";
-        const string highLevel = "WoW! You can spawn a Drake without burning the laboratory.";
+        const string MidLevel = "You are an evoker of magic winds.";
+        const string HighLevel = "WoW! You can spawn a Drake without burning the laboratory.";
         const string specialLevel = "You are a master of the arcane arts.";
-        const string rankD = "Raoden the Elantri";
-        const string rankC = "Zyn the Buggued";
-        const string rankB = "Arka Nullpointer";
-        const string rankA = "Elarion of the Embers";
-        const string rankS = "ITB-Wizard the Grey";
+        const string RankD = "Raoden the Elantri";
+        const string RankC = "Zyn the Buggued";
+        const string RankB = "Arka Nullpointer";
+        const string RankA = "Elarion of the Embers";
+        const string RankS = "ITB-Wizard the Grey";
         const string RankMessage = "You are rank {0}";
         const string MonsterMessage = "{0} has apeard!!!";
         const string MonsterDeathMessage = "{0} has died!!!";
@@ -85,19 +88,47 @@ public class Program
          | o   o |/ 
          '-------'
          """;
-        const int maximMonters = 5;
+        const string ScrollTitle = "===== What do you want to do with youre Scroll =====";
+        const string ScrollOption1 = "1. Delete spaces";
+        const string ScrollOption2 = "2. Count vowels";
+        const string ScrollOption3 = "3. Extract numbers";
+        const string Scroll1 = " The   path   has   been   marked . You   must   find    the   flame that   sleeps   in   the   tunnels . ";
+        const string Scroll2 = "Thê sęcrèt fìrè Ìs hìddèn wìthìn thê shàdòws. Ónlý thôsè wìth thé còrrect êyè càn rëvèàl thê pàth lîngérîng bèlôw thê eàrth.";
+        const string Scroll3 = "7The 92guardian 504holds 33the 808key. If 12you 401seek 77the 9003truth, 66proceed 4to 222the 1309wall where 818the 44ancient 505echoes 300slumber.";
+        const string InputErrorMessageScroll = "Invalid input. Please enter a number between 0 and 7.";
+
 
         int op = 0;
         int level = 1;
         int hours = 0;
         int hp = 0;
+        int bits = 0;
+        int storeOption = 0;
         int[] dicesValor = { 1, 2, 3, 4, 5, 6 };
         int[] monsterRosterHp = { 3, 5, 10, 11, 18, 15, 20, 50 };
+        int[] priceObject = { 30, 10, 50, 40, 20 };
+        int sop = 0;
         bool validInput;
         string rankWizard = "Unknown";
         string nameWizard = "Unknown";
-        string[] dices = { DiceSideOne, DiceSideTwo, DiceSideThree, DiceSideFour, DiceSideFive, DiceSideSix};
+        string[] dices = { DiceSideOne, DiceSideTwo, DiceSideThree, DiceSideFour, DiceSideFive, DiceSideSix };
         string[] monsterRoster = { "Wandering Skeleton 💀", "Forest Goblin 👹", "Green Slime 🤢", "Ember Wolf 🐺", "Giant Spider 🕷️", "Iron Golem 🤖", "Lost Necromancer 🧝‍", "Ancient Dragon 🐉" };
+        string[] objectBuy = { "Iron Dagger 🗡️", "Healing Potion ⚗️", "Ancient Key 🗝️", "Crossbow 🏹", "Metal Shield 🛡️" };
+        string[] inventory = new string[0];
+        string[] attacksLvl1 = { "Magic Spark 💫" };
+        string[] attacksLvl2 = { "Fireball 🔥", "Ice Ray 🥏", "Arcane Shield ⚕️" };
+        string[] attacksLvl3 = { "Meteor ☄️", "Pure Energy Explosion 💥", "Minor Charm 🎭", "Air Strike 🍃" };
+        string[] attacksLvl4 = { "Wave of Light ⚜️", "Storm of Wings 🐦" };
+        string[] attacksLvl5 = { "Cataclysm 🌋", "Portal of Chaos 🌀", "Arcane Blood Pact 🩸", "Elemental Storm ⛈️" };
+        string[][] attacksLevel = new string[][]
+        {
+            attacksLvl1,
+            attacksLvl2,
+            attacksLvl3,
+            attacksLvl4,
+            attacksLvl5
+        };
+
 
         Random random = new Random();
 
@@ -136,7 +167,7 @@ public class Program
             switch (op)
             {
                 case 1:
-                    
+
                     Console.Write("What is your name: ");
                     nameWizard = Console.ReadLine();
                     Console.WriteLine($"You will start at level {level}.");
@@ -157,28 +188,28 @@ public class Program
                     if (level >= 20 && level < 30)
                     {
                         Console.WriteLine(LowLevel);
-                        rankWizard = rankC;
+                        rankWizard = RankC;
 
                     }
                     else if (level >= 30 && level < 35)
                     {
-                        Console.WriteLine(midLevel);
-                        rankWizard = rankB;
+                        Console.WriteLine(MidLevel);
+                        rankWizard = RankB;
                     }
                     else if (level >= 35 && level < 40)
                     {
-                        Console.WriteLine(highLevel);
-                        rankWizard = rankA;
+                        Console.WriteLine(HighLevel);
+                        rankWizard = RankA;
                     }
                     else if (level >= 40)
                     {
                         Console.WriteLine(specialLevel);
-                        rankWizard = rankS;
+                        rankWizard = RankS;
                     }
                     else
                     {
-                        Console.WriteLine(uslessLevel);
-                        rankWizard = rankD;
+                        Console.WriteLine(UslessLevel);
+                        rankWizard = RankD;
                     }
 
                     Console.WriteLine(RankMessage, rankWizard);
@@ -217,7 +248,92 @@ public class Program
                     break;
 
                 case 3:
-                    Console.WriteLine("You loot the mine and find some gold!");
+                    Console.Clear();
+                    Console.WriteLine("===== LOOT THE MINE =====");
+
+                    int attempts = 5;
+                    int size = 5;
+                    Random rnd = new Random();
+
+                    string[,] mineVisible = new string[size, size];
+                    int[,] mineHidden = new int[size, size];
+
+                    for (int i = 0; i < size; i++)
+                        for (int j = 0; j < size; j++)
+                            mineVisible[i, j] = "➖";
+
+                    for (int i = 0; i < 5; i++)
+                    {
+                        int x = rnd.Next(0, size);
+                        int y = rnd.Next(0, size);
+                        mineHidden[x, y] = 1;
+                    }
+
+                    void PrintMatrix()
+                    {
+                        Console.WriteLine();
+                        for (int i = 0; i < size; i++)
+                        {
+                            for (int j = 0; j < size; j++)
+                                Console.Write(mineVisible[i, j] + " ");
+                            Console.WriteLine();
+                        }
+                        Console.WriteLine();
+                    }
+
+                    Console.WriteLine("You have 5 attempts to mine for bits!\n");
+
+                    for (int i = 1; i <= attempts; i++)
+                    {
+                        Console.WriteLine($"Attempt {i} of {attempts}");
+
+                        int x, y;
+                        bool validCoordinates = false;
+
+                        do
+                        {
+                            try
+                            {
+                                Console.Write("Enter X coordinate (0-4): ");
+                                x = int.Parse(Console.ReadLine());
+
+                                Console.Write("Enter Y coordinate (0-4): ");
+                                y = int.Parse(Console.ReadLine());
+
+                                if (x >= 0 && x < size && y >= 0 && y < size)
+                                {
+                                    validCoordinates = true;
+
+                                    if (mineHidden[x, y] == 1)
+                                    {
+                                        int reward = rnd.Next(5, 51);
+                                        bits += reward;
+                                        mineVisible[x, y] = "🪙";
+                                        Console.WriteLine($"You found a coin! +{reward} bits");
+                                    }
+                                    else
+                                    {
+                                        mineVisible[x, y] = "❌";
+                                        Console.WriteLine("Nothing here...");
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Coordinates must be between 0 and 4.");
+                                }
+                            }
+                            catch
+                            {
+                                Console.WriteLine("Invalid input. Enter numbers only.");
+                                validCoordinates = false;
+                            }
+
+                        } while (!validCoordinates);
+
+                        PrintMatrix();
+                    }
+
+                    Console.WriteLine($"Mining complete! You now have {bits} bits.");
                     break;
 
                 case 4:
