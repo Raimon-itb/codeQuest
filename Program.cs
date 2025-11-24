@@ -352,7 +352,37 @@ public class Program
 
                     break;
                 case 5:
-                    Console.WriteLine("You loot the mine and find some gold!");
+                    Console.WriteLine("===== STORE =====");
+                    for (int i = 0; i < objectBuy.Length; i++)
+                    {
+                        Console.WriteLine($"{i + 1}. {objectBuy[i]} - {priceObject[i]} bits");
+                    }
+
+                    Console.Write("Choose an item to buy (1-5): ");
+                    bool validStore = int.TryParse(Console.ReadLine(), out storeOption);
+
+                    if (!validStore || storeOption < 1 || storeOption > objectBuy.Length)
+                    {
+                        Console.WriteLine("Invalid option.");
+                    }
+                    else
+                    {
+                        int price = priceObject[storeOption - 1];
+
+                        if (bits < price)
+                        {
+                            Console.WriteLine("Not enough bits to buy this item.");
+                        }
+                        else
+                        {
+                            bits = bits - price;
+
+                            Array.Resize(ref inventory, inventory.Length + 1);
+                            inventory[^1] = objectBuy[storeOption - 1];
+
+                            Console.WriteLine($"You bought {objectBuy[storeOption - 1]}!");
+                        }
+                    }
                     break;
                 case 6:
                     Console.WriteLine("You loot the mine and find some gold!");
