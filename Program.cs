@@ -385,7 +385,41 @@ public class Program
                     }
                     break;
                 case 6:
-                    Console.WriteLine("You loot the mine and find some gold!");
+                    if (rankWizard == RankD)
+                    {
+                        for (int i = 0; i < attacksLvl1.Length; i++)
+                        {
+                            Console.WriteLine("You can use this attacks: " + attacksLevel[0][i]);
+                        }
+                    }
+                    else if (rankWizard == RankC)
+                    {
+                        for (int i = 0; i < attacksLvl2.Length; i++)
+                        {
+                            Console.WriteLine("You can use this attacks: " + attacksLevel[1][i]);
+                        }
+                    }
+                    else if (rankWizard == RankB)
+                    {
+                        for (int i = 0; i < attacksLvl3.Length; i++)
+                        {
+                            Console.WriteLine("You can use this attacks: " + attacksLevel[2][i]);
+                        }
+                    }
+                    else if (rankWizard == RankA)
+                    {
+                        for (int i = 0; i < attacksLvl4.Length; i++)
+                        {
+                            Console.WriteLine("You can use this attacks: " + attacksLevel[3][i]);
+                        }
+                    }
+                    else if (rankWizard == RankS)
+                    {
+                        for (int i = 0; i < attacksLvl5.Length; i++)
+                        {
+                            Console.WriteLine("You can use this attacks: " + attacksLevel[4][i]);
+                        }
+                    }
                     break;
                 case 7:
                     Console.WriteLine("You loot the mine and find some gold!");
