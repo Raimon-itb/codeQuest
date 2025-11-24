@@ -422,7 +422,65 @@ public class Program
                     }
                     break;
                 case 7:
-                    Console.WriteLine("You loot the mine and find some gold!");
+                    Console.WriteLine(ScrollTitle);
+                    Console.WriteLine(ScrollOption1);
+                    Console.WriteLine(ScrollOption2);
+                    Console.WriteLine(ScrollOption3);
+
+                    bool scrollValidInput = true;
+                    bool scrollsAreDesciphered = false;
+
+                    try
+                    {
+                        sop = Convert.ToInt32(Console.ReadLine());
+                    }
+                    catch
+                    {
+                        Console.WriteLine(InputErrorMessageScroll);
+                        scrollValidInput = false;
+                    }
+
+                    if (!scrollValidInput)
+                    {
+                        continue;
+                    }
+
+                    switch (sop)
+                    {
+                        case 1:
+
+                            string scroll1NoSpaces = Scroll1.Trim();
+                            Console.WriteLine("First scroll has been deciphered.");
+                            break;
+
+                        case 2:
+
+                            int scroll2VowelCount = 0;
+                            string vowels = "aáàäAÁÀÄeéèëEÉÈËiíìïIÍÌÏoóòöOÓÒÖuúùüUÚÙÜ";
+
+                            foreach (char letter in Scroll2)
+                            {
+                                if (vowels.Contains(letter))
+                                {
+                                    scroll2VowelCount++;
+                                }
+                            }
+                            Console.WriteLine("Second scroll has been deciphered.");
+                            break;
+
+                        case 3:
+
+                            string scroll3Descipher = Scroll3;
+                            string number = "1234567890";
+
+                            foreach (char character in number)
+                            {
+                                scroll3Descipher = scroll3Descipher.Replace(character.ToString(), "");
+                            }
+                            Console.WriteLine("Third scroll has been deciphered.");
+                            break;
+
+                    }
                     break;
                 case 0:
                     Console.WriteLine("Exiting game...");
